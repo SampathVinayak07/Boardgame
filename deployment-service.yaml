@@ -33,4 +33,5 @@ spec:
     - protocol: "TCP"
       port: 80
       targetPort: 8080 
+      nodePort: 30080  # port on the nodes
   type: LoadBalancer # type of the service.
