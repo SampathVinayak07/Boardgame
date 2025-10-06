@@ -1,11 +1,14 @@
-FROM openjdk:17-alpine
-        
+# Use a stable Java 17 base image
+FROM openjdk:17-jdk-slim
+
+# Set working directory inside the container
+WORKDIR /app
+
+# Copy the JAR file from Maven build output to the container
+COPY target/*.jar app.jar
+
+# Expose the app’s port
 EXPOSE 8080
- 
-ENV APP_HOME /usr/src/app
 
-COPY target/*.jar $APP_HOME/app.jar
-
-WORKDIR $APP_HOME
-
-CMD ["java", "-jar", "app.jar"]
+# Start the Spring Boot app
+ENTRYPOINT ["java", "-jar", "/app/app.jar"]
